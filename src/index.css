@@ -85,6 +85,8 @@ header {
   border: none;
   background-color: inherit;
   color: inherit;
+  padding: 0.5rem;
+  margin: 0 0.25rem;
 }
 
 /*================================ BOARD STYLES =================================*/
