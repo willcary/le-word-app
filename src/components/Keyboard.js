@@ -15,7 +15,7 @@ function Keyboard() {
       </div>
       {/*Figure out how to make Enter and Delete 1.5 flex units*/}
       <div className="keyboard__row">
-        {LETTERS_THIRD_ROW.map(item => <button key={item} className={(item === "ENTER" || item === "DEL") && "wide-key"}>{item}</button>)}
+        {LETTERS_THIRD_ROW.map(item => <button key={item} className={(item === "ENTER" || item === "DEL") ? "wide-key" : undefined}>{item}</button>)}
       </div>
   </div>;
 }
