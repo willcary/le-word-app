@@ -80,8 +80,8 @@ header {
 }
 
 .board__tile {
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -90,7 +90,6 @@ header {
   font-weight: bold;
   vertical-align: middle;
   box-sizing: border-box;
-  color: var(--tile-text-color);
   text-transform: uppercase;
   user-select: none;
   border: 2px solid var(--color-tone-4);
@@ -100,16 +99,17 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 8px;
+  margin: 0 8px 8px;
 }
 
 button {
   font-size: 0.85rem;
   font-weight: 700;
-  height: 3rem;
+  height: 3.2rem;
   background-color: var(--color-tone-4);
   border: none;
   margin: 0 6px 0 0;
+  padding: 0;
   border-radius: 4px;
   cursor: pointer;
   text-transform: uppercase;
@@ -122,4 +122,8 @@ button:last-of-type {
 
 .spacer {
   flex: 0.5;
+}
+
+.wide-key {
+  flex: 1.5 1;
 }
