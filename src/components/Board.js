@@ -1,23 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../Context'
 // import PropTypes from 'prop-types';
 
 import Tile from "./Tile"
 
 function Board() {
-  const [boardContent, setBoardContent] = useState([
-      ['a', '', '', '', ''],
-      ['', '', '', '', ''],
-      ['', '', '', '', ''],
-      ['', '', '', '', ''],
-      ['', '', '', '', ''],
-      ['', '', '', '', '']
-  ])
-
-  const KEYS = []
+  const { boardContent } = useContext(Context)
     
   return <div className="board">
-      {boardContent.map((arr, index) => {
-          return <div className="board__row" key={index}>{arr.map((item, index) => <Tile key={index} innerContent={item} />)}</div>
+      {boardContent.map((arr, boardRowIndex) => {
+          return <div className="board__row" key={`boardRow-${boardRowIndex}`} id={`boardRow-${boardRowIndex}`}>
+            {arr.map((item, guessIndex) => <Tile key={`boardRow-${boardRowIndex}-tile-${guessIndex}`} innerContent={item} id={`boardRow-${boardRowIndex}-tile-${guessIndex}`} innerContent={item} />)}
+          </div>
       })}
   </div>;
 }
