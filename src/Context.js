@@ -6,28 +6,73 @@ function ContextProvider({children}) {
     // const [loading, setLoading] = useState(true);
     // const [error, setError] = useState(null);
     const [theme, setTheme] = useState('light');
-    const guess = 'board'
     const [boardContent, setBoardContent] = useState([
-        ['b', 'o', 'a', 'r', 'd'],
+        ['', '', '', '', ''],
         ['', '', '', '', ''],
         ['', '', '', '', ''],
         ['', '', '', '', ''],
         ['', '', '', '', ''],
         ['', '', '', '', '']
     ])
-    const [currentRow, setCurrentRow] = useState(0);
-    const [currentGuess, setCurrentGuess] = useState(0);
-
+    let [currentRow, setCurrentRow] = useState(0)
+    let [currentGuess, setCurrentGuess] = useState(0)
     // const [evalutations, setEvaluations] = useState([null, null, null, null, null, null])
-    // const [gameStatus, setGameStatus] = useState(false);
-    const [solution, setSolution] = useState('');
+    const [gameOver, setGameOver] = useState(false);
+    const [solution, setSolution] = useState('GUESS');
+
+    const flipTile = () => {
+        boardContent[currentRow].forEach((letter, index) => {
+            if (letter === solution[index]) {
+                document.getElemementByID(`boardRow-${currentRow}-tile-${currentGuess}`).classList.add('green-tile')
+                return
+            } else if (solution) {
+                document.getElemementByID(`boardRow-${currentRow}-tile-${currentGuess}`).classList.add('yellow-tile')
+                return
+            } else {
+                document.getElemementByID(`boardRow-${currentRow}-tile-${currentGuess}`).classList.add('gray-tile')
+                return
+            }
+
+        })
+    } 
     
     function handleKey(e) {
         const { value } = e.target
         const newBoardContent = [...boardContent]
-        newBoardContent[currentRow][currentGuess] = value
-        setBoardContent(newBoardContent)
-        console.log(value + ' clicked!')
+        // ================== Need to create function for row submisson that then adds to currentRow. ===================================
+        if (value === "DEL") {
+            if (currentGuess > 0) {
+                newBoardContent[currentRow][currentGuess - 1] = ''
+                setCurrentGuess(prevGuess => prevGuess -= 1)
+            }
+            return
+        }
+        if (value === "ENTER") {
+            if (currentGuess === 5) {
+                const guess = boardContent[currentRow].join('')
+                flipTile()
+                if (guess === solution) {
+                    alert('YOU WON!!!!')
+                    setGameOver(true)
+                    return
+                }
+                if (currentRow >= 5) {
+                    alert('You lost :(')
+                    setGameOver(true)
+                    return
+                }
+                setCurrentGuess(0)
+                setCurrentRow(prevRow => prevRow += 1)
+            }
+            return
+        }
+
+        if (currentGuess < 5 && currentRow < 6) {
+            newBoardContent[currentRow][currentGuess] = value
+            setBoardContent(newBoardContent)
+            setCurrentGuess(prevGuess => prevGuess += 1)
+            console.log(currentGuess, currentRow)
+        }
     }
 
     // useEffect(() => {

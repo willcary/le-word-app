@@ -119,6 +119,18 @@ header {
   border: 2px solid var(--color-tone-4);
 }
 
+.green-tile {
+  background-color: var(--darkendGreen);
+}
+
+.yellow-tile {
+  background-color: var(--darkendYellow);
+}
+
+.gray-tile {
+  background-color: var(--color-tone-4);
+}
+
 /*================================ KEYBOARD STYLES =================================*/
 
 .keyboard__row {
