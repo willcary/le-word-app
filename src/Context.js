@@ -28,22 +28,27 @@ function ContextProvider({children}) {
     const [gameOver, setGameOver] = useState(false);
     const [solution, setSolution] = useState('GUESS');
 
+    const colorKeyboard = () => {
+        
+    }
+
     const flipTile = () => {
         const newBoardStyles = [...boardStyles]
         boardContent[currentRow].forEach((letter, index) => {
             if (letter === solution[index]) {
-                newBoardStyles[currentRow][index] = 'board__tile--green'
+                newBoardStyles[currentRow][index] = 'flip board__tile--green'
                 return
             } else if (solution.includes(letter)) {
-                newBoardStyles[currentRow][index] = 'board__tile--yellow'
+                newBoardStyles[currentRow][index] = 'flip board__tile--yellow'
                 return
             } else {
-                newBoardStyles[currentRow][index] = 'board__tile--gray'
+                newBoardStyles[currentRow][index] = 'flip board__tile--gray'
                 return
             }
         })
         setBoardStyles(newBoardStyles)
     } 
+
     
     function handleKey(e) {
         const { value } = e.target
