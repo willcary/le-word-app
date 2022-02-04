@@ -1,8 +1,8 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
-function Tile({ innerContent }) {
-  return <div className="board__tile">{innerContent ? innerContent : ''}</div>;
+function Tile({ innerContent, className }) {
+  return <div className={className}>{innerContent ? innerContent : ''}</div>;
 }
 
 // Tile.propTypes = {};

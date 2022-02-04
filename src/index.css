@@ -8,6 +8,7 @@
   --color-tone-5: #edeff1;
   --color-tone-6: #f6f7f8;
   --color-tone-7: #ffffff;
+  --color-absent: var(--color-tone-2);
   --opacity-50: rgba(255, 255, 255, 0.5);
   --green: #6aaa64;
   --darkendGreen: #538d4e;
@@ -119,16 +120,23 @@ header {
   border: 2px solid var(--color-tone-4);
 }
 
-.green-tile {
+.board__tile--green,
+.board__tile--yellow,
+.board__tile--gray {
+  color: var(--white);
+  border: none;
+}
+
+.board__tile--green {
   background-color: var(--darkendGreen);
 }
 
-.yellow-tile {
+.board__tile--yellow {
   background-color: var(--darkendYellow);
 }
 
-.gray-tile {
-  background-color: var(--color-tone-4);
+.board__tile--gray {
+  background-color: var(--color-absent);
 }
 
 /*================================ KEYBOARD STYLES =================================*/

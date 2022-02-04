@@ -14,6 +14,14 @@ function ContextProvider({children}) {
         ['', '', '', '', ''],
         ['', '', '', '', '']
     ])
+    const [boardStyles, setBoardStyles] = useState([
+        ['', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['', '', '', '', '']
+    ])
     let [currentRow, setCurrentRow] = useState(0)
     let [currentGuess, setCurrentGuess] = useState(0)
     // const [evalutations, setEvaluations] = useState([null, null, null, null, null, null])
@@ -21,19 +29,20 @@ function ContextProvider({children}) {
     const [solution, setSolution] = useState('GUESS');
 
     const flipTile = () => {
+        const newBoardStyles = [...boardStyles]
         boardContent[currentRow].forEach((letter, index) => {
             if (letter === solution[index]) {
-                document.getElemementByID(`boardRow-${currentRow}-tile-${currentGuess}`).classList.add('green-tile')
+                newBoardStyles[currentRow][index] = 'board__tile--green'
                 return
-            } else if (solution) {
-                document.getElemementByID(`boardRow-${currentRow}-tile-${currentGuess}`).classList.add('yellow-tile')
+            } else if (solution.includes(letter)) {
+                newBoardStyles[currentRow][index] = 'board__tile--yellow'
                 return
             } else {
-                document.getElemementByID(`boardRow-${currentRow}-tile-${currentGuess}`).classList.add('gray-tile')
+                newBoardStyles[currentRow][index] = 'board__tile--gray'
                 return
             }
-
         })
+        setBoardStyles(newBoardStyles)
     } 
     
     function handleKey(e) {
@@ -146,7 +155,8 @@ function ContextProvider({children}) {
             theme,
             themeToggler,
             handleKey,
-            boardContent
+            boardContent,
+            boardStyles
         }}>
             {children}
         </Context.Provider>
