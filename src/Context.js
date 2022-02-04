@@ -6,6 +6,42 @@ function ContextProvider({children}) {
     // const [loading, setLoading] = useState(true);
     // const [error, setError] = useState(null);
     const [theme, setTheme] = useState('light');
+    const [keyboard, setKeyboard] = useState({
+        firstRow: [
+            {letter: 'Q', class: ''},
+            {letter: 'W', class: ''},
+            {letter: 'E', class: ''},
+            {letter: 'R', class: ''},
+            {letter: 'T', class: ''},
+            {letter: 'Y', class: ''},
+            {letter: 'U', class: ''},
+            {letter: 'I', class: ''},
+            {letter: 'O', class: ''},
+            {letter: 'P', class: ''}
+        ], 
+        secondRow: [
+            {letter: 'A', class: ''},
+            {letter: 'S', class: ''},
+            {letter: 'D', class: ''},
+            {letter: 'F', class: ''},
+            {letter: 'G', class: ''},
+            {letter: 'H', class: ''},
+            {letter: 'J', class: ''},
+            {letter: 'K', class: ''},
+            {letter: 'L', class: ''}
+        ],
+        thirdRow: [
+            {letter: 'ENTER', class: ''},
+            {letter: 'Z', class: ''},
+            {letter: 'X', class: ''},
+            {letter: 'C', class: ''},
+            {letter: 'V', class: ''},
+            {letter: 'B', class: ''},
+            {letter: 'N', class: ''},
+            {letter: 'M', class: ''},
+            {letter: 'DEL', class: ''}
+        ]
+    })
     const [boardContent, setBoardContent] = useState([
         ['', '', '', '', ''],
         ['', '', '', '', ''],
@@ -29,7 +65,7 @@ function ContextProvider({children}) {
     const [solution, setSolution] = useState('GUESS');
 
     const colorKeyboard = () => {
-        
+
     }
 
     const flipTile = () => {
@@ -160,6 +196,7 @@ function ContextProvider({children}) {
             theme,
             themeToggler,
             handleKey,
+            keyboard,
             boardContent,
             boardStyles
         }}>
