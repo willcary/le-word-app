@@ -7,15 +7,15 @@ function Keyboard() {
 
   return <div className="keyboard">
       <div className="keyboard__row">
-        {keyboard.firstRow.map(item => <button key={item.letter} value={item.letter} onClick={handleKey}>{item.letter}</button>)}
+        {keyboard[0].map(item => <button key={item.letter} value={item.letter} className={item.class} onClick={handleKey}>{item.letter}</button>)}
       </div>
       <div className="keyboard__row">
         <div className="spacer"></div>
-        {keyboard.secondRow.map(item => <button key={item.letter} value={item.letter} onClick={handleKey}>{item.letter}</button>)}
+        {keyboard[1].map(item => <button key={item.letter} value={item.letter} className={item.class} onClick={handleKey}>{item.letter}</button>)}
         <div className="spacer"></div>
       </div>
       <div className="keyboard__row">
-        {keyboard.thirdRow.map(item => <button key={item.letter} value={item.letter} className={(item.letter === "ENTER" || item.letter === "DEL") ? "wide-key" : undefined} onClick={handleKey}>{item.letter}</button>)}
+        {keyboard[2].map(item => <button key={item.letter} value={item.letter} className={item.class} onClick={handleKey}>{item.letter}</button>)}
       </div>
   </div>;
 }

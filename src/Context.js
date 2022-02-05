@@ -6,8 +6,8 @@ function ContextProvider({children}) {
     // const [loading, setLoading] = useState(true);
     // const [error, setError] = useState(null);
     const [theme, setTheme] = useState('light');
-    const [keyboard, setKeyboard] = useState({
-        firstRow: [
+    const [keyboard, setKeyboard] = useState([
+        [
             {letter: 'Q', class: ''},
             {letter: 'W', class: ''},
             {letter: 'E', class: ''},
@@ -19,7 +19,7 @@ function ContextProvider({children}) {
             {letter: 'O', class: ''},
             {letter: 'P', class: ''}
         ], 
-        secondRow: [
+        [
             {letter: 'A', class: ''},
             {letter: 'S', class: ''},
             {letter: 'D', class: ''},
@@ -30,8 +30,8 @@ function ContextProvider({children}) {
             {letter: 'K', class: ''},
             {letter: 'L', class: ''}
         ],
-        thirdRow: [
-            {letter: 'ENTER', class: ''},
+        [
+            {letter: 'ENTER', class: 'wide-key'},
             {letter: 'Z', class: ''},
             {letter: 'X', class: ''},
             {letter: 'C', class: ''},
@@ -39,9 +39,9 @@ function ContextProvider({children}) {
             {letter: 'B', class: ''},
             {letter: 'N', class: ''},
             {letter: 'M', class: ''},
-            {letter: 'DEL', class: ''}
+            {letter: 'DEL', class: 'wide-key'}
         ]
-    })
+    ])
     const [boardContent, setBoardContent] = useState([
         ['', '', '', '', ''],
         ['', '', '', '', ''],
@@ -62,35 +62,39 @@ function ContextProvider({children}) {
     let [currentGuess, setCurrentGuess] = useState(0)
     // const [evalutations, setEvaluations] = useState([null, null, null, null, null, null])
     const [gameOver, setGameOver] = useState(false);
-    const [solution, setSolution] = useState('GUESS');
+    const [solution, setSolution] = useState('SPARK');
 
-    const colorKeyboard = () => {
-
+    const colorKeyboard = (keyboard, letter, className) => {
+        keyboard.forEach(array => {
+            array.forEach(key => key.letter === letter ? key.class = className : undefined)
+        })
     }
 
     const flipTile = () => {
         const newBoardStyles = [...boardStyles]
+        const newKeyboard = [...keyboard]
         boardContent[currentRow].forEach((letter, index) => {
             if (letter === solution[index]) {
-                newBoardStyles[currentRow][index] = 'flip board__tile--green'
+                newBoardStyles[currentRow][index] = 'flip green-overlay'
+                colorKeyboard(newKeyboard, letter, 'green-overlay')
                 return
             } else if (solution.includes(letter)) {
-                newBoardStyles[currentRow][index] = 'flip board__tile--yellow'
+                newBoardStyles[currentRow][index] = 'flip yellow-overlay'
+                colorKeyboard(newKeyboard, letter, 'yellow-overlay')
                 return
             } else {
-                newBoardStyles[currentRow][index] = 'flip board__tile--gray'
+                newBoardStyles[currentRow][index] = 'flip gray-overlay'
+                colorKeyboard(newKeyboard, letter, 'gray-overlay')
                 return
             }
         })
         setBoardStyles(newBoardStyles)
+        setKeyboard(newKeyboard)
     } 
 
-    
-    function handleKey(e) {
-        const { value } = e.target
+    function updateKeyBoard(value) {
         const newBoardContent = [...boardContent]
-        // ================== Need to create function for row submisson that then adds to currentRow. ===================================
-        if (value === "DEL") {
+        if (value === "DEL" || value === "BACKSPACE") {
             if (currentGuess > 0) {
                 newBoardContent[currentRow][currentGuess - 1] = ''
                 setCurrentGuess(prevGuess => prevGuess -= 1)
@@ -116,7 +120,6 @@ function ContextProvider({children}) {
             }
             return
         }
-
         if (currentGuess < 5 && currentRow < 6) {
             newBoardContent[currentRow][currentGuess] = value
             setBoardContent(newBoardContent)
@@ -124,6 +127,23 @@ function ContextProvider({children}) {
             console.log(currentGuess, currentRow)
         }
     }
+
+    function handleKey(e) {
+        const { value } = e.target
+        console.log(value)
+        updateKeyBoard(value)
+    }
+
+    function handleKeyTap(e) {
+        const value = e.key.toUpperCase()
+        console.log(value)
+        updateKeyBoard(value)
+    }
+
+    useEffect(() => {
+        window.addEventListener("keydown", handleKeyTap)
+        return () => window.removeEventListener("keydown", handleKeyTap)
+    }, [currentGuess, currentRow])
 
     // useEffect(() => {
     //     fetch("https://random-words5.p.rapidapi.com/getRandom?wordLength=5", {

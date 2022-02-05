@@ -137,22 +137,22 @@ header {
   }
 }
 
-.board__tile--green,
-.board__tile--yellow,
-.board__tile--gray {
+.green-overlay,
+.yellow-overlay,
+.gray-overlay {
   color: var(--white);
   border: none;
 }
 
-.board__tile--green {
+.green-overlay {
   background-color: var(--darkendGreen);
 }
 
-.board__tile--yellow {
+.yellow-overlay {
   background-color: var(--darkendYellow);
 }
 
-.board__tile--gray {
+.gray-overlay {
   background-color: var(--color-absent);
 }
 
@@ -178,6 +178,8 @@ button {
   cursor: pointer;
   text-transform: uppercase;
   flex: 1;
+  transition: background-color 800ms cubic-bezier(1, 0.03, 0.94, 0.67),
+    color 800ms cubic-bezier(1, 0.03, 0.94, 0.67);
 }
 
 button:last-of-type {
