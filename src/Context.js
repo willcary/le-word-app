@@ -103,15 +103,15 @@ function ContextProvider({children}) {
         }
         if (value === "ENTER") {
             if (currentGuess >= 5) {
-                const guess = boardContent[currentRow].join('')
                 flipTile()
+                const guess = boardContent[currentRow].join('')
                 if (guess === solution) {
-                    alert('YOU WON!!!!')
+                    setTimeout(() => alert('YOU WON!!!!'), 500)
                     setGameOver(true)
                     return
                 }
                 if (currentRow >= 5) {
-                    alert('You lost :(')
+                    setTimeout(() => alert('You lost :('), 500)
                     setGameOver(true)
                     return
                 }
