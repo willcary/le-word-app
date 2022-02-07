@@ -1,7 +1,12 @@
-import { useContext } from "react"
+import { useState, useContext } from "react"
 import { Context } from "../Context"
+import StatsModal from "./StatsModal"
+import HelpModal from "./HelpModal"
+import { help, stats, light, dark } from "../assets/logos/logos"
 
 export default function Header() {
+  const [showStatsModal, setShowStatsModal] = useState(false)
+  const [showHelpModal, setShowHelpModal] = useState(false)
   const { theme, themeToggler } = useContext(Context)
   const iconColor = () => theme === 'light' ? '#878a8c' : '#565758'
 
