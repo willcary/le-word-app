@@ -62,7 +62,7 @@ function ContextProvider({children}) {
     let [currentGuess, setCurrentGuess] = useState(0)
     // const [evalutations, setEvaluations] = useState([null, null, null, null, null, null])
     const [gameOver, setGameOver] = useState(false);
-    const [solution, setSolution] = useState('SPARK');
+    const [solution, setSolution] = useState('LIGHT');
 
     const colorKeyboard = (keyboard, letter, className) => {
         keyboard.forEach(array => {
@@ -102,7 +102,7 @@ function ContextProvider({children}) {
             return
         }
         if (value === "ENTER") {
-            if (currentGuess === 5) {
+            if (currentGuess >= 5) {
                 const guess = boardContent[currentRow].join('')
                 flipTile()
                 if (guess === solution) {
@@ -115,8 +115,8 @@ function ContextProvider({children}) {
                     setGameOver(true)
                     return
                 }
-                setCurrentGuess(0)
                 setCurrentRow(prevRow => prevRow += 1)
+                setCurrentGuess(0)
             }
             return
         }
@@ -124,26 +124,26 @@ function ContextProvider({children}) {
             newBoardContent[currentRow][currentGuess] = value
             setBoardContent(newBoardContent)
             setCurrentGuess(prevGuess => prevGuess += 1)
-            console.log(currentGuess, currentRow)
         }
     }
 
     function handleKey(e) {
         const { value } = e.target
-        console.log(value)
         updateKeyBoard(value)
     }
 
     function handleKeyTap(e) {
         const value = e.key.toUpperCase()
-        console.log(value)
-        updateKeyBoard(value)
+        const regex = new RegExp('[A-Z]')
+        if (regex.test(value) || value === "BACKSPACE" || value === "ENTER") {
+            updateKeyBoard(value)
+        }
     }
 
     useEffect(() => {
         window.addEventListener("keydown", handleKeyTap)
         return () => window.removeEventListener("keydown", handleKeyTap)
-    }, [currentGuess, currentRow])
+    }, [currentGuess])
 
     // useEffect(() => {
     //     fetch("https://random-words5.p.rapidapi.com/getRandom?wordLength=5", {

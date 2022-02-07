@@ -178,7 +178,7 @@ button {
   cursor: pointer;
   text-transform: uppercase;
   flex: 1;
-  transition: background-color 800ms cubic-bezier(1, 0.03, 0.94, 0.67),
+  transition: background-color 500ms cubic-bezier(1, 0.03, 0.94, 0.67),
     color 800ms cubic-bezier(1, 0.03, 0.94, 0.67);
 }
 
