@@ -62,25 +62,28 @@ function ContextProvider({children}) {
     let [currentGuess, setCurrentGuess] = useState(0)
     // const [evalutations, setEvaluations] = useState([null, null, null, null, null, null])
     const [gameOver, setGameOver] = useState(false);
-    const [solution, setSolution] = useState('LIGHT');
+    const [solution, setSolution] = useState('blaze'.toUpperCase());
 
     const colorKeyboard = (keyboard, letter, className) => {
         keyboard.forEach(array => {
-            array.forEach(key => key.letter === letter ? key.class = className : undefined)
+            array.forEach(key => key.letter === letter && !key.class ? key.class = className : undefined)
         })
     }
 
     const flipTile = () => {
         const newBoardStyles = [...boardStyles]
         const newKeyboard = [...keyboard]
+        let mutableSolution = solution;
         boardContent[currentRow].forEach((letter, index) => {
             if (letter === solution[index]) {
                 newBoardStyles[currentRow][index] = 'flip green-overlay'
                 colorKeyboard(newKeyboard, letter, 'green-overlay')
+                mutableSolution = mutableSolution.replace(letter, '')
                 return
-            } else if (solution.includes(letter)) {
+            } else if (mutableSolution.includes(letter)) {
                 newBoardStyles[currentRow][index] = 'flip yellow-overlay'
                 colorKeyboard(newKeyboard, letter, 'yellow-overlay')
+                mutableSolution = mutableSolution.replace(letter, '')
                 return
             } else {
                 newBoardStyles[currentRow][index] = 'flip gray-overlay'
