@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function HelpModal(props) {
-  return <div>Instructions here...</div>;
+function HelpModal({ showHelpModal }) {
+  return showHelpModal && <div className="help-modal">Instructions here...</div>;
 }
 
-HelpModal.propTypes = {};
+HelpModal.propTypes = {
+    showHelpModal: PropTypes.bool.isRequired
+};
 
 export default HelpModal;

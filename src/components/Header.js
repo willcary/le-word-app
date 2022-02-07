@@ -4,8 +4,8 @@ import StatsModal from "./StatsModal"
 import HelpModal from "./HelpModal"
 
 export default function Header() {
-  const [showStatsModal, setShowStatsModal] = useState(false)
   const [showHelpModal, setShowHelpModal] = useState(false)
+  const [showStatsModal, setShowStatsModal] = useState(false)
   const { theme, themeToggler } = useContext(Context)
   const iconColor = () => theme === 'light' ? '#878a8c' : '#565758'
 
@@ -31,5 +31,7 @@ export default function Header() {
         <button className="header-btn">{stats}</button>
         <button onClick={themeToggler} className="header-btn">{theme === 'light' ? dark : light}</button>
       </div>
+      <HelpModal showHelpModal={showHelpModal} />
+      <StatsModal showStatsModal={showStatsModal} />
   </header>;
 }

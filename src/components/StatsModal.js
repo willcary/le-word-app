@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function StatsModal(props) {
-
-
-  return <div>Stats here...</div>;
+function StatsModal({ showStatsModal }) {
+  return showStatsModal && <div className="stats-modal">Stats here...</div>;
 }
 
-StatsModal.propTypes = {};
+StatsModal.propTypes = {
+    showStatsModal: PropTypes.bool.isRequired
+};
 
 export default StatsModal;
