@@ -11,6 +11,12 @@
   font-weight: 400;
 }
 
+.modal-close {
+  position: relative;
+  right: -1rem;
+  top: 3px;
+}
+
 .modal p {
   font-size: 14px;
 }
@@ -25,9 +31,59 @@
   margin: 0 auto;
 }
 
+.modal-open-animation {
+  animation: 0.2s linear slideup;
+}
+
+@keyframes slideup {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-close-animation {
+  animation: 0.2s linear slidedown;
+}
+
+@keyframes slidedown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+}
+
 /*================================ HELP MODAL STYLES =================================*/
 .modal-help__section {
   border-bottom: 1px solid var(--color-tone-4);
+}
+
+.modal-tile-container {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.modal-tile {
+  max-width: 45px;
+  height: 45px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  vertical-align: middle;
+  text-transform: uppercase;
+  user-select: none;
+  border: 2px solid var(--color-tone-4);
 }
 
 /*================================ STATS MODAL STYLES =================================*/

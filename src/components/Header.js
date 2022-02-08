@@ -7,6 +7,7 @@ import HelpModal from "./HelpModal"
 export default function Header() {
   const [showHelpModal, setShowHelpModal] = useState(false)
   const [showStatsModal, setShowStatsModal] = useState(false)
+  const [closingModal, setClosingModal] = useState(false)
   const { theme, themeToggler } = useContext(Context)
   const iconColor = () => theme === 'light' ? '#878a8c' : '#565758'
 
@@ -32,11 +33,19 @@ export default function Header() {
   }
   
   function closeHelpModal() {
-    setShowHelpModal(false)
+    setClosingModal(true)
+    setTimeout(() => {
+      setShowHelpModal(false)
+      setClosingModal(false)
+    }, 195)
   }
 
   function closeStatsModal() {
-    setShowStatsModal(false)
+    setClosingModal(true)
+    setTimeout(() => {
+      setShowStatsModal(false)
+      setClosingModal(false)
+    }, 195)
   }
 
   return <header>
@@ -48,7 +57,7 @@ export default function Header() {
         <button className="header-btn" onClick={openStatsModal}>{stats}</button>
         <button onClick={themeToggler} className="header-btn">{theme === 'light' ? dark : light}</button>
       </div>
-      <HelpModal show={showHelpModal} close={closeHelpModal} />
-      <StatsModal show={showStatsModal} close={closeStatsModal} />
+      <HelpModal show={showHelpModal} close={closeHelpModal} closing={closingModal} />
+      <StatsModal show={showStatsModal} close={closeStatsModal} closing={closingModal} />
   </header>;
 }
