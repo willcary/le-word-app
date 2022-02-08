@@ -1,0 +1,36 @@
+/*================================ KEYBOARD STYLES =================================*/
+.keyboard__row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 8px 8px;
+}
+
+button {
+  font-size: 0.85rem;
+  font-weight: 700;
+  height: 3.2rem;
+  background-color: var(--color-tone-4);
+  color: var(--color-tone-1);
+  border: none;
+  margin: 0 6px 0 0;
+  padding: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  flex: 1;
+  transition: background-color 500ms cubic-bezier(0.19, 0.85, 0.52, 0.8),
+    color 500ms cubic-bezier(0.19, 0.85, 0.52, 0.8);
+}
+
+button:last-of-type {
+  margin: 0;
+}
+
+.spacer {
+  flex: 0.5;
+}
+
+.wide-key {
+  flex: 1.5 1;
+}

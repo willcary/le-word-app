@@ -1,5 +1,6 @@
 import { useState, useContext } from "react"
 import { Context } from "../Context"
+import "../css/header.css"
 import StatsModal from "./StatsModal"
 import HelpModal from "./HelpModal"
 
