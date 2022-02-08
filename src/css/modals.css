@@ -11,12 +11,6 @@
   font-weight: 400;
 }
 
-.modal-close {
-  position: relative;
-  right: -1rem;
-  top: 3px;
-}
-
 .modal p {
   font-size: 14px;
 }
@@ -66,6 +60,12 @@
   border-bottom: 1px solid var(--color-tone-4);
 }
 
+.modal-home-close {
+  position: relative;
+  right: -1rem;
+  top: 3px;
+}
+
 .modal-tile-container {
   display: flex;
   gap: 0.25rem;
@@ -98,14 +98,22 @@
 .modal-stats__inner {
   background-color: var(--color-tone-7);
   border: 1px solid var(--color-tone-6);
+  border-radius: 0.5rem;
   box-shadow: 0 4px 23px 0 rgb(0 0 0 / 20%);
+  padding: 1.5rem 1rem;
+}
+
+.modal-stats-close {
+  position: relative;
+  right: -0.5rem;
+  top: -1rem;
 }
 
 .stats-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
 }
 
 .stat-container {

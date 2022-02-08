@@ -35,17 +35,17 @@ export default function Header() {
   function closeHelpModal() {
     setClosingModal(true)
     setTimeout(() => {
-      setShowHelpModal(false)
       setClosingModal(false)
-    }, 195)
+      setShowHelpModal(false)
+    }, 190)
   }
 
   function closeStatsModal() {
     setClosingModal(true)
     setTimeout(() => {
-      setShowStatsModal(false)
       setClosingModal(false)
-    }, 195)
+      setShowStatsModal(false)
+    }, 190)
   }
 
   return <header>

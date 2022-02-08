@@ -15,7 +15,7 @@ function StatsModal({ show, close, closing }) {
           <div className="menu"></div>
           <h2>Statistics</h2>
           <div className="menu">
-            <button onClick={close} className="header-btn">{x}</button>
+            <button onClick={close} className="header-btn modal-stats-close">{x}</button>
           </div>
       </header>
       <div className="stats-container">
@@ -36,6 +36,8 @@ function StatsModal({ show, close, closing }) {
           <p className="stat-label">Max Streak</p>
         </div>
       </div>
+      <h2>Guess Distribution</h2>
+      <div>Graphs here...</div>
     </div>
   </div>;
 }

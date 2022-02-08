@@ -15,7 +15,7 @@ function HelpModal({ show, close, closing }) {
                 <div className="menu"></div>
                 <h2>HOW TO PLAY</h2>
                 <div className="menu">
-                    <button onClick={close} className="header-btn modal-close">{x}</button>
+                    <button onClick={close} className="header-btn modal-help-close">{x}</button>
                 </div>
             </header>
             <div className="modal-help__section">
