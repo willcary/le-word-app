@@ -83,3 +83,10 @@ body {
 .gray-overlay {
   background-color: var(--color-absent);
 }
+
+h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-left: 2.2rem;
+}

@@ -1,11 +1,40 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import "../css/statsmodal.css"
+import React from 'react'
+import PropTypes from 'prop-types'
+import "../css/modals.css"
 
 function StatsModal({ show, close }) {
-  return show && <div className="stats-modal">
-    Stats here...
-    <button onClick={close}>X</button>
+  const x = <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+      <path fill="var(--color-tone-3)" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+    </svg>
+
+  return show && <div className="modal modal-stats">
+    <div className="modal__inner modal-stats__inner">
+      <header>
+          <div classNam="menu"></div>
+          <h2>Statistics</h2>
+          <div className="menu">
+            <button onClick={close} className="header-btn">{x}</button>
+          </div>
+      </header>
+      <div className="stats-container">
+        <div className="stat-container">
+          <p className="stat">6</p>
+          <p className="stat-label">Played</p>
+        </div>
+        <div className="stat-container">
+          <p className="stat">100</p>
+          <p className="stat-label">Win %</p>
+        </div>
+        <div className="stat-container">
+          <p className="stat">4</p>
+          <p className="stat-label">Current Streak</p>
+        </div>
+        <div className="stat-container">
+          <p className="stat">6</p>
+          <p className="stat-label">Max Streak</p>
+        </div>
+      </div>
+    </div>
   </div>;
 }
 
