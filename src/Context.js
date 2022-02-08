@@ -137,7 +137,7 @@ function ContextProvider({children}) {
 
     function handleKeyTap(e) {
         const value = e.key.toUpperCase()
-        const regex = new RegExp('[A-Z]')
+        const regex = new RegExp('^[A-Z]$')
         if (regex.test(value) || value === "BACKSPACE" || value === "ENTER") {
             updateKeyBoard(value)
         }
