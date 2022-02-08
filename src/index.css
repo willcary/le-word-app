@@ -178,8 +178,8 @@ button {
   cursor: pointer;
   text-transform: uppercase;
   flex: 1;
-  transition: background-color 500ms cubic-bezier(1, 0.03, 0.94, 0.67),
-    color 800ms cubic-bezier(1, 0.03, 0.94, 0.67);
+  transition: background-color 500ms cubic-bezier(0.19, 0.85, 0.52, 0.8),
+    color 500ms cubic-bezier(0.19, 0.85, 0.52, 0.8);
 }
 
 button:last-of-type {
