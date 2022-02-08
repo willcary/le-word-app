@@ -14,7 +14,7 @@ function Board() {
             {arr.map((item, guessIndex) => {
               return <Tile 
                 key={`boardRow-${boardRowIndex}-tile-${guessIndex}`} 
-                className={!boardStyles[boardRowIndex][guessIndex] ? "board__tile" : "board__tile" + " " + boardStyles[boardRowIndex][guessIndex]} 
+                className={!boardStyles[boardRowIndex][guessIndex] ? "board__tile" : "board__tile " + boardStyles[boardRowIndex][guessIndex]} 
                 innerContent={item} 
               />}
             )}
