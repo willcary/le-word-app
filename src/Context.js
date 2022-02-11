@@ -114,10 +114,7 @@ function ContextProvider({children}) {
         if (currentRow >= 5) {
             setTimeout(() => alert('You lost :(. The solution was ' + solution), 500)
             setGamesPlayed(prevCount => prevCount += 1)
-            setGuessDistribution({
-                ...guessDistribution,
-                lost: guessDistribution.lost + 1
-            })
+            setGuessDistribution( guesses => ({...guesses, lost: guesses.lost + 1}))
             return
         }
         setCurrentRow(prevRow => prevRow += 1)
