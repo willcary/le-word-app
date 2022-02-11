@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import "../css/modals.css"
 
-function StatsModal({ show, close, closing }) {
+function StatsModal({ show, close, closing, gamesPlayed, winPercent }) {
   const x = <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
       <path fill="var(--color-tone-3)" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
     </svg>
@@ -20,20 +20,12 @@ function StatsModal({ show, close, closing }) {
       </header>
       <div className="stats-container">
         <div className="stat-container">
-          <p className="stat">6</p>
+          <p className="stat">{gamesPlayed}</p>
           <p className="stat-label">Played</p>
         </div>
         <div className="stat-container">
-          <p className="stat">100</p>
+          <p className="stat">{winPercent}</p>
           <p className="stat-label">Win %</p>
-        </div>
-        <div className="stat-container">
-          <p className="stat">4</p>
-          <p className="stat-label">Current Streak</p>
-        </div>
-        <div className="stat-container">
-          <p className="stat">6</p>
-          <p className="stat-label">Max Streak</p>
         </div>
       </div>
       <h2>Guess Distribution</h2>

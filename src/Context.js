@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { storageAvailable } from './assets/js/storageAvailable';
 
 const Context = React.createContext();
 
 function ContextProvider({children}) {
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
     const [theme, setTheme] = useState('light');
     const [keyboard, setKeyboard] = useState([
         [
@@ -60,10 +59,16 @@ function ContextProvider({children}) {
     ])
     let [currentRow, setCurrentRow] = useState(0)
     let [currentGuess, setCurrentGuess] = useState(0)
-    // const [evalutations, setEvaluations] = useState([null, null, null, null, null, null])
     const [gameOver, setGameOver] = useState(false);
-    const [solution, setSolution] = useState('blaze'.toUpperCase());
+    const [solution, setSolution] = useState('WORDY')
+    const [gamesPlayed, setGamesPlayed] = useState(0)
+    const [gamesWon, setGamesWon] = useState(0)
+    const [guessDistribution, setGuessDistribution] = useState({one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, lost: 0})
+    const [winPercent, setWinPercent] = useState(0)
+    const [showStatsModal, setShowStatsModal] = useState(false)
 
+    const GUESS_REF = ['one', 'two', 'three', 'four', 'five', 'six', 'lost']
+    // ====================================== Logic for handling key presses and updating state accordingly =========================================
     const colorKeyboard = (keyboard, letter, className) => {
         keyboard.forEach(array => {
             array.forEach(key => key.letter === letter && !key.class ? key.class = className : undefined)
@@ -95,6 +100,33 @@ function ContextProvider({children}) {
         setKeyboard(newKeyboard)
     } 
 
+
+    // Bug with incrementing guesses other than lost. Updated number returns null. Rethink using GUESS_REF.
+    const guessSubmitLogic = (guess) => {
+        if (guess === solution) {
+            setTimeout(() => setShowStatsModal(true), 800)
+            setGamesPlayed(prevCount => prevCount += 1)
+            setGamesWon(prevCount => prevCount += 1)
+            const guessKey = GUESS_REF[currentRow]
+            const guessKeyValue = guessDistribution.guessKey
+            console.log(guessDistribution.guessKey)
+            setGuessDistribution( guesses => ({ ...guesses, [guessKey]: guesses.guessKey + 1 }))
+            setGameOver(true)
+            return
+        }
+        if (currentRow >= 5) {
+            setTimeout(() => alert('You lost :(. The solution was ' + solution), 500)
+            setGamesPlayed(prevCount => prevCount += 1)
+            setGuessDistribution({
+                ...guessDistribution,
+                lost: guessDistribution.lost + 1
+            })
+            return
+        }
+        setCurrentRow(prevRow => prevRow += 1)
+        setCurrentGuess(0)
+    }
+
     function updateKeyBoard(value) {
         const newBoardContent = [...boardContent]
         if (value === "DEL" || value === "BACKSPACE") {
@@ -106,20 +138,28 @@ function ContextProvider({children}) {
         }
         if (value === "ENTER") {
             if (currentGuess >= 5) {
-                flipTile()
                 const guess = boardContent[currentRow].join('')
-                if (guess === solution) {
-                    setTimeout(() => alert('YOU WON!!!!'), 500)
-                    setGameOver(true)
-                    return
-                }
-                if (currentRow >= 5) {
-                    setTimeout(() => alert('You lost :('), 500)
-                    setGameOver(true)
-                    return
-                }
-                setCurrentRow(prevRow => prevRow += 1)
-                setCurrentGuess(0)
+                fetch("https://bing-spell-check2.p.rapidapi.com/spellcheck?mode=proof&text=" + guess, {
+                    "method": "GET",
+                    "headers": {
+                        "x-rapidapi-host": "bing-spell-check2.p.rapidapi.com",
+                        "x-rapidapi-key": process.env.REACT_APP_WORD_DICTIONARY_API_KEY
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.flaggedTokens.length > 0) {
+                        alert('Not a valid word.')
+                        return
+                    } else {
+                        flipTile()
+                        guessSubmitLogic(guess)
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    guessSubmitLogic(guess)
+                })
             }
             return
         }
@@ -143,64 +183,7 @@ function ContextProvider({children}) {
         }
     }
 
-    useEffect(() => {
-        window.addEventListener("keydown", handleKeyTap)
-        return () => window.removeEventListener("keydown", handleKeyTap)
-    }, [currentGuess])
-
-    // useEffect(() => {
-    //     fetch("https://random-words5.p.rapidapi.com/getRandom?wordLength=5", {
-    //         "method": "GET",
-    //         "headers": {
-    //             "x-rapidapi-host": "random-words5.p.rapidapi.com",
-    //             "x-rapidapi-key": process.env.REACT_APP_RANDOM_WORDS_API_KEY
-    //         }
-    //     })
-    //     .then(response => {
-    //         if (response.ok) {
-    //             return response.json()    
-    //         }
-    //         throw response
-    //     })
-    //     .then(data => console.log(data))
-    //     .catch(err => {
-    //         console.error(err);
-    //     });
-    // }, [])
-
-    // useEffect(() => {
-    //     fetch("https://jspell-checker.p.rapidapi.com/check", {
-    //         "method": "POST",
-    //         "headers": {
-    //             "content-type": "application/json",
-    //             "x-rapidapi-host": "jspell-checker.p.rapidapi.com",
-    //             "x-rapidapi-key": process.env.REACT_APP_WORD_DICTIONARY_API_KEY
-    //         },
-    //         "body": {
-    //             "language": "enUS",
-    //             "fieldvalues": guess,
-    //             "config": {
-    //                 "forceUpperCase": false,
-    //                 "ignoreIrregularCaps": false,
-    //                 "ignoreFirstCaps": true,
-    //                 "ignoreNumbers": false,
-    //                 "ignoreUpper": false,
-    //                 "ignoreDouble": false,
-    //                 "ignoreWordsWithNumbers": false
-    //             }
-    //         }
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data)
-    //     })
-    //     .catch(err => {
-    //         console.error(err);
-    //     });
-    // }, [])
-
-
-// Theme Toggler Function =================================================================================================================
+    // Theme Toggler Function =================================================================================================================
     function themeToggler() {
         if (theme === 'light') {
             setTheme('dark')
@@ -211,17 +194,72 @@ function ContextProvider({children}) {
         }
     }
 
+    // ====================================== Fetch request for a random word to start the game =========================================
+
+    useEffect(() => {
+        // fetch("https://random-words5.p.rapidapi.com/getMultipleRandom?count=5&wordLength=5", {
+        //     "method": "GET",
+        //     "headers": {
+        //         "x-rapidapi-host": "random-words5.p.rapidapi.com",
+        //         "x-rapidapi-key": process.env.REACT_APP_RANDOM_WORDS_API_KEY
+        //     }
+        // })
+        // .then(response => response.json())
+        // .then(data => setSolution(data[0].toUpperCase()))
+        // .catch(err => {
+        //     console.error(err);
+        // })
+        if (storageAvailable('localStorage')) {
+            const storedGamesPlayed = localStorage.getItem('gamesPlayed')
+            const storedGamesWon = localStorage.getItem('gamesWon')
+            const storedGuessDistribution = localStorage.getItem('guessDistribution')
+            if (storedGamesWon) {
+                setGamesWon(Number(storedGamesWon))
+            }
+            if (storedGamesPlayed) {
+                setGamesPlayed(Number(storedGamesPlayed))
+            }
+            if (Object.values(storedGuessDistribution).some(item => item)) {
+                setGuessDistribution(JSON.parse(storedGuessDistribution))
+            }
+        }
+    }, [])
+
+    // Update Win Percent
+    useEffect(() => {
+        if (gamesWon / gamesPlayed) {
+            setWinPercent(Math.round((gamesWon / gamesPlayed) * 100))
+        }
+    }, [gamesWon, gamesPlayed]) 
+
+    // Updating Local Storage Data
+    useEffect(() => localStorage.setItem('gamesWon', gamesWon.toString()), [gamesWon])
+    useEffect(() => localStorage.setItem('gamesPlayed', gamesPlayed.toString()), [gamesPlayed])
+    useEffect(() => localStorage.setItem('guessDistribution', JSON.stringify(guessDistribution)), [guessDistribution])
+
+
+
+    // Add Event Listeners for Comp Keyboard Interactions 
+    useEffect(() => {
+        window.addEventListener("keydown", handleKeyTap)
+        return () => window.removeEventListener("keydown", handleKeyTap)
+    }, [currentGuess])
+
+
 
     return (
         <Context.Provider value={{
-            // loading,
-            // error,
             theme,
             themeToggler,
             handleKey,
             keyboard,
             boardContent,
-            boardStyles
+            boardStyles,
+            gamesPlayed,
+            winPercent,
+            guessDistribution,
+            showStatsModal,
+            setShowStatsModal
         }}>
             {children}
         </Context.Provider>

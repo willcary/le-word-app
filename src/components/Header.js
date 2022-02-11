@@ -6,9 +6,8 @@ import HelpModal from "./HelpModal"
 
 export default function Header() {
   const [showHelpModal, setShowHelpModal] = useState(false)
-  const [showStatsModal, setShowStatsModal] = useState(false)
   const [closingModal, setClosingModal] = useState(false)
-  const { theme, themeToggler } = useContext(Context)
+  const { theme, themeToggler, gamesPlayed, winPercent, showStatsModal, setShowStatsModal } = useContext(Context)
   const iconColor = () => theme === 'light' ? '#878a8c' : '#565758'
 
   const help = <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -58,6 +57,6 @@ export default function Header() {
         <button onClick={themeToggler} className="header-btn">{theme === 'light' ? dark : light}</button>
       </div>
       <HelpModal show={showHelpModal} close={closeHelpModal} closing={closingModal} />
-      <StatsModal show={showStatsModal} close={closeStatsModal} closing={closingModal} />
+      <StatsModal show={showStatsModal} close={closeStatsModal} closing={closingModal} gamesPlayed={gamesPlayed} winPercent={winPercent} />
   </header>;
 }
