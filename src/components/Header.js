@@ -52,7 +52,7 @@ export default function Header() {
       <div className="menu">
         <button className="header-btn" onClick={openHelpModal}>{help}</button>
       </div>
-      <h1 className="title"> Wordle </h1>
+      <h1 className="title">Le Word</h1>
       <div className="menu">
         <button className="header-btn" onClick={openStatsModal}>{stats}</button>
         <button onClick={themeToggler} className="header-btn">{theme === 'light' ? dark : light}</button>
