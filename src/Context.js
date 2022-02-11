@@ -67,7 +67,6 @@ function ContextProvider({children}) {
     const [winPercent, setWinPercent] = useState(0)
     const [showStatsModal, setShowStatsModal] = useState(false)
 
-    const GUESS_REF = ['one', 'two', 'three', 'four', 'five', 'six', 'lost']
     // ====================================== Logic for handling key presses and updating state accordingly =========================================
     const colorKeyboard = (keyboard, letter, className) => {
         keyboard.forEach(array => {
@@ -101,16 +100,14 @@ function ContextProvider({children}) {
     } 
 
 
-    // Bug with incrementing guesses other than lost. Updated number returns null. Rethink using GUESS_REF.
+    // Bug with incrementing guesses other than lost. Updated number returns null. Rethink using GUESS_REF.********************************************!!!!
     const guessSubmitLogic = (guess) => {
         if (guess === solution) {
             setTimeout(() => setShowStatsModal(true), 800)
             setGamesPlayed(prevCount => prevCount += 1)
             setGamesWon(prevCount => prevCount += 1)
-            const guessKey = GUESS_REF[currentRow]
-            const guessKeyValue = guessDistribution.guessKey
-            console.log(guessDistribution.guessKey)
-            setGuessDistribution( guesses => ({ ...guesses, [guessKey]: guesses.guessKey + 1 }))
+            const guessKey = Object.keys(guessDistribution)[currentRow]
+            setGuessDistribution( guesses => ({ ...guesses, [guessKey]: guesses[guessKey] + 1 }))
             setGameOver(true)
             return
         }
