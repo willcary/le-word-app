@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import "../css/modals.css"
+import GuessChart from './GuessChart'
 
 function StatsModal({ show, close, closing, gamesPlayed, winPercent }) {
   const x = <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -29,7 +30,7 @@ function StatsModal({ show, close, closing, gamesPlayed, winPercent }) {
         </div>
       </div>
       <h2>Guess Distribution</h2>
-      <div>Graphs here...</div>
+      <GuessChart />
     </div>
   </div>;
 }

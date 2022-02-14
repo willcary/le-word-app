@@ -63,7 +63,15 @@ function ContextProvider({children}) {
     const [solution, setSolution] = useState('WORDY')
     const [gamesPlayed, setGamesPlayed] = useState(0)
     const [gamesWon, setGamesWon] = useState(0)
-    const [guessDistribution, setGuessDistribution] = useState({one: 0, two: 0, three: 0, four: 0, five: 0, six: 0, lost: 0})
+    const [guessDistribution, setGuessDistribution] = useState([
+        {name: 'one', count: 0},
+        {name: 'two', count: 0}, 
+        {name: 'three', count: 0}, 
+        {name: 'four', count: 0}, 
+        {name: 'five', count: 0}, 
+        {name: 'six', count: 0}, 
+        {name: 'lost', count: 0}
+    ])
     const [winPercent, setWinPercent] = useState(0)
     const [showStatsModal, setShowStatsModal] = useState(false)
 
@@ -102,19 +110,21 @@ function ContextProvider({children}) {
 
     // Bug with incrementing guesses other than lost. Updated number returns null. Rethink using GUESS_REF.********************************************!!!!
     const guessSubmitLogic = (guess) => {
+        const newGuessDist = [...guessDistribution]
         if (guess === solution) {
             setTimeout(() => setShowStatsModal(true), 800)
             setGamesPlayed(prevCount => prevCount += 1)
             setGamesWon(prevCount => prevCount += 1)
-            const guessKey = Object.keys(guessDistribution)[currentRow]
-            setGuessDistribution( guesses => ({ ...guesses, [guessKey]: guesses[guessKey] + 1 }))
+            newGuessDist[currentRow].count += 1
+            setGuessDistribution(newGuessDist)
             setGameOver(true)
             return
         }
         if (currentRow >= 5) {
             setTimeout(() => alert('You lost :(. The solution was ' + solution), 500)
             setGamesPlayed(prevCount => prevCount += 1)
-            setGuessDistribution( guesses => ({...guesses, lost: guesses.lost + 1}))
+            newGuessDist[6].count += 1
+            setGuessDistribution(newGuessDist)
             return
         }
         setCurrentRow(prevRow => prevRow += 1)
