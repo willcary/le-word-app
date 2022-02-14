@@ -51,10 +51,9 @@ function HelpModal({ show, close, closing }) {
                 </div>
                 <p>The letter <strong>U</strong> is not in the word in any spot.</p>
             </div>
-            <p><strong>A new WORDLE will be available each day!</strong></p>
+            <p><strong>Refresh the page for a new word!</strong></p>
         </div>
-            
-    </div>;
+    </div>
 }
 
 HelpModal.propTypes = {
