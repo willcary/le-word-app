@@ -14,7 +14,7 @@ function StatsModal({ show, close, closing, gamesPlayed, winPercent }) {
     <div className={"modal__inner modal-stats__inner" + modalAnimationClass()}>
       <header>
           <div className="menu"></div>
-          <h2>Statistics</h2>
+          <h2 className="modal-stats--h2">Statistics</h2>
           <div className="menu">
             <button onClick={close} className="header-btn modal-stats-close">{x}</button>
           </div>
@@ -29,7 +29,7 @@ function StatsModal({ show, close, closing, gamesPlayed, winPercent }) {
           <p className="stat-label">Win %</p>
         </div>
       </div>
-      <h2>Guess Distribution</h2>
+      <h2 className="no-margin">Guess Distribution</h2>
       <GuessChart />
     </div>
   </div>;

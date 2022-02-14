@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext } from 'react'
 import { Context } from "../Context"
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts'
 
 function GuessChart() {
-    const { guessDistribution } = useContext(Context)
+    const { guessDistribution, theme } = useContext(Context)
     return (
         <ResponsiveContainer width="100%" height="100%">
             <BarChart
+                layout="vertical"
                 width={500}
                 height={300}
                 data={guessDistribution}
@@ -17,12 +18,13 @@ function GuessChart() {
                 bottom: 5,
                 }}
             >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                <XAxis type="number" hide="true" />
+                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} />
                 <Tooltip />
-                <Legend />
-                <Bar dataKey="count" fill="#8884d8" />
+                <Bar dataKey="count" fill="#538d4e">
+                    <LabelList dataKey="count" position="right" />
+                </Bar>
             </BarChart>
         </ResponsiveContainer>
     )

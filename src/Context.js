@@ -64,13 +64,12 @@ function ContextProvider({children}) {
     const [gamesPlayed, setGamesPlayed] = useState(0)
     const [gamesWon, setGamesWon] = useState(0)
     const [guessDistribution, setGuessDistribution] = useState([
-        {name: 'one', count: 0},
-        {name: 'two', count: 0}, 
-        {name: 'three', count: 0}, 
-        {name: 'four', count: 0}, 
-        {name: 'five', count: 0}, 
-        {name: 'six', count: 0}, 
-        {name: 'lost', count: 0}
+        {name: '1', count: 0},
+        {name: '2', count: 0}, 
+        {name: '3', count: 0}, 
+        {name: '4', count: 0}, 
+        {name: '5', count: 0}, 
+        {name: '6', count: 0}
     ])
     const [winPercent, setWinPercent] = useState(0)
     const [showStatsModal, setShowStatsModal] = useState(false)
@@ -123,8 +122,6 @@ function ContextProvider({children}) {
         if (currentRow >= 5) {
             setTimeout(() => alert('You lost :(. The solution was ' + solution), 500)
             setGamesPlayed(prevCount => prevCount += 1)
-            newGuessDist[6].count += 1
-            setGuessDistribution(newGuessDist)
             return
         }
         setCurrentRow(prevRow => prevRow += 1)

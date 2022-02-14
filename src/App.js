@@ -3,6 +3,7 @@ import { Context } from "./Context"
 import Header from "./components/Header"
 import Board from "./components/Board"
 import Keyboard from "./components/Keyboard"
+import GuessChart from './components/GuessChart'
 
 function App() {
   const { theme } = useContext(Context)
@@ -12,7 +13,6 @@ function App() {
     <div className={bodyClass}>
       <div className="game-body">
         <Header />
-        {/* <h1>{theme}</h1> */}
         <Board />
         <Keyboard />
       </div>

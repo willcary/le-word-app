@@ -103,6 +103,11 @@
   padding: 1.5rem 1rem;
 }
 
+.modal-stats--h2 {
+  position: relative;
+  left: 1.5rem;
+}
+
 .modal-stats-close {
   position: relative;
   right: -0.5rem;
@@ -133,4 +138,8 @@
 }
 
 .modal .stat-label {
+}
+
+.recharts-responsive-container {
+  min-height: 200px;
 }
