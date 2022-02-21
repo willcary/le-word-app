@@ -18,7 +18,6 @@ function GuessChart() {
                 bottom: 5,
                 }}
             >
-                {/* <CartesianGrid strokeDasharray="3 3" /> */}
                 <XAxis type="number" hide="true" />
                 <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} />
                 <Tooltip />
