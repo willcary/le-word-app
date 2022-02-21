@@ -9,6 +9,7 @@
   background-color: var(--color-tone-7);
   text-align: left;
   font-weight: 400;
+  z-index: 1;
 }
 
 .modal p {

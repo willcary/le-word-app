@@ -72,6 +72,20 @@ h2 {
   justify-content: space-between;
 }
 
+.alert {
+  color: var(--color-tone-7);
+  background-color: var(--color-tone-1);
+  width: fit-content;
+  padding: 1em 1.6em;
+  border-radius: 0.3em;
+  position: absolute;
+  top: 11%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  /* box-shadow: 1px 3px 4px var(--darkendGreen); */
+}
+
 .green-overlay,
 .yellow-overlay,
 .gray-overlay {

@@ -135,7 +135,6 @@ function ContextProvider({children}) {
         if (currentRow >= 5) {
             setGameOver(true)
             setTimeout(() => setShowStatsModal(true), 800)
-            setTimeout(() => setGameOver(false), 2000)
             setGamesPlayed(prevCount => prevCount += 1)
             return
         }
@@ -277,7 +276,8 @@ function ContextProvider({children}) {
             showStatsModal,
             setShowStatsModal,
             gameOver,
-            isWord
+            isWord,
+            solution
         }}>
             {children}
         </Context.Provider>
