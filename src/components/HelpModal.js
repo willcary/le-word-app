@@ -19,37 +19,37 @@ function HelpModal({ show, close, closing }) {
                 </div>
             </header>
             <div className="modal-help__section">
-                <p>Guess the <strong>WORDLE</strong> in 6 tries.</p>
+                <p>Guess the <strong>WORD</strong> in 6 tries.</p>
                 <p>Each guess must be a valid 5 letter word. Hit the enter button to submit.</p>
                 <p>After each guess, the color of the tiles will change to show how close your guess was to the word.</p>
             </div>
             <div className="modal-help__section">
                 <h3>Examples</h3>
                 <div className='modal-tile-container'>
-                    <div className="modal-tile flip green-overlay">W</div>
+                    <div className="modal-tile flip green-overlay">B</div>
                     <div className="modal-tile">E</div>
                     <div className="modal-tile">A</div>
                     <div className="modal-tile">R</div>
-                    <div className="modal-tile">Y</div>
-                </div>
-                <p>The letter <strong>W</strong> is in the word and in the correct spot.</p>
-                <div className='modal-tile-container'>
-                    <div className="modal-tile">P</div>
-                    <div className="modal-tile flip yellow-overlay">I</div>
-                    <div className="modal-tile">L</div>
-                    <div className="modal-tile">L</div>
                     <div className="modal-tile">S</div>
                 </div>
-                <p>The letter <strong>I</strong> is in the word but in the wrong spot.</p>
+                <p>The letter <strong>B</strong> is in the word and in the correct spot.</p>
+                <div className='modal-tile-container'>
+                    <div className="modal-tile">W</div>
+                    <div className="modal-tile flip yellow-overlay">O</div>
+                    <div className="modal-tile">R</div>
+                    <div className="modal-tile">D</div>
+                    <div className="modal-tile">S</div>
+                </div>
+                <p>The letter <strong>O</strong> is in the word but in the wrong spot.</p>
                 <div>VAGUE</div>
                 <div className='modal-tile-container'>
-                    <div className="modal-tile">V</div>
+                    <div className="modal-tile">C</div>
+                    <div className="modal-tile">R</div>
                     <div className="modal-tile">A</div>
-                    <div className="modal-tile">G</div>
-                    <div className="modal-tile flip gray-overlay">U</div>
+                    <div className="modal-tile flip gray-overlay">N</div>
                     <div className="modal-tile">E</div>
                 </div>
-                <p>The letter <strong>U</strong> is not in the word in any spot.</p>
+                <p>The letter <strong>N</strong> is not in the word in any spot.</p>
             </div>
             <p><strong>Refresh the page for a new word!</strong></p>
         </div>
