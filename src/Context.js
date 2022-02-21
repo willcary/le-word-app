@@ -129,7 +129,6 @@ function ContextProvider({children}) {
             setGamesWon(prevCount => prevCount += 1)
             newGuessDist[currentRow].count += 1
             setGuessDistribution(newGuessDist)
-            setGameOver(true)
             return
         }
         if (currentRow >= 5) {
