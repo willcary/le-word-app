@@ -17,7 +17,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   vertical-align: middle;
   text-transform: uppercase;
@@ -26,15 +26,9 @@
   transition: background-color 500ms ease-in-out;
 }
 
-@media (min-width: 325px) {
-  .board__tile {
-    width: 50px;
-    height: 50px;
-  }
-}
-
 @media (min-width: 400px) {
   .board__tile {
+    font-size: 2rem;
     width: 60px;
     height: 60px;
   }
