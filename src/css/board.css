@@ -12,8 +12,8 @@
 }
 
 .board__tile {
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -26,9 +26,9 @@
   transition: background-color 500ms ease-in-out;
 }
 
-@media (max-width: 320px) {
+@media (min-width: 400px) {
   .board__tile {
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
   }
 }
