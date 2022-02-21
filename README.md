@@ -11,12 +11,12 @@ A wordle clone that uses APIs to pull random words and check spelling. See live 
 
 ## Make It Your Own
 
-1. Clone or download the repository
-2. Enter your own default Solution in the useState hook on line 64 of the Context.js file
+1. Clone or download the repository (you should have [Node.js](https://nodejs.org/en/) installed already).
+2. In Context.js, enter a new default Solution in the useState hook on line 64.
 3. Subscribe to the [Bing Spell Check](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-spell-check2/) API and the [Random Words](https://rapidapi.com/sheharyar566/api/random-words5/) API.
 4. Create a .env file as shown in the .env_sample file.
 5. Replace the API Keys with your own.
-6. Enjoy!
+6. Launch and Enjoy!
 
 ## Credits
 
