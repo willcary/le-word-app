@@ -59,7 +59,8 @@ function ContextProvider({children}) {
     ])
     let [currentRow, setCurrentRow] = useState(0)
     let [currentGuess, setCurrentGuess] = useState(0)
-    const [gameOver, setGameOver] = useState(false);
+    const [gameOver, setGameOver] = useState(false)
+    const [isWord, setIsWord] = useState(true)
     const [solution, setSolution] = useState('WORDY')
     const [gamesPlayed, setGamesPlayed] = useState(0)
     const [gamesWon, setGamesWon] = useState(0)
@@ -106,6 +107,18 @@ function ContextProvider({children}) {
         setKeyboard(newKeyboard)
     } 
 
+    const shakeTiles = () => {
+        const newBoardStyles = [...boardStyles]
+        newBoardStyles[currentRow].forEach((item, index, array) => array[index] = 'shake')
+        setBoardStyles(newBoardStyles)
+        setTimeout(() => {
+            setIsWord(false)
+            newBoardStyles[currentRow].forEach((item, index, array) => array[index] = '')
+            setBoardStyles(newBoardStyles)
+        }, 500)
+        setTimeout(() => setIsWord(true), 2000)
+    }
+
 
     // Bug with incrementing guesses other than lost. Updated number returns null. Rethink using GUESS_REF.********************************************!!!!
     const guessSubmitLogic = (guess) => {
@@ -120,7 +133,9 @@ function ContextProvider({children}) {
             return
         }
         if (currentRow >= 5) {
-            setTimeout(() => alert('You lost :(. The solution was ' + solution), 500)
+            setGameOver(true)
+            setTimeout(() => setShowStatsModal(true), 800)
+            setTimeout(() => setGameOver(false), 2000)
             setGamesPlayed(prevCount => prevCount += 1)
             return
         }
@@ -150,7 +165,7 @@ function ContextProvider({children}) {
                 .then(response => response.json())
                 .then(data => {
                     if (data.flaggedTokens.length > 0) {
-                        alert('Not a valid word.')
+                        shakeTiles()
                         return
                     } else {
                         flipTile()
@@ -260,7 +275,9 @@ function ContextProvider({children}) {
             winPercent,
             guessDistribution,
             showStatsModal,
-            setShowStatsModal
+            setShowStatsModal,
+            gameOver,
+            isWord
         }}>
             {children}
         </Context.Provider>
