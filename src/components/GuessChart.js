@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Context } from "../Context"
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LabelList } from 'recharts'
 
 function GuessChart() {
-    const { guessDistribution, theme } = useContext(Context)
+    const { guessDistribution } = useContext(Context)
     return (
         <ResponsiveContainer width="100%" height="100%">
             <BarChart
