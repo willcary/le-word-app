@@ -1,4 +1,4 @@
-# Le Word
+# Le Word - A Wordle Clone
 
 A wordle clone that uses APIs to pull random words and check spelling. See live [here]().
 
