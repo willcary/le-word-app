@@ -24,5 +24,3 @@ A wordle clone that uses APIs to pull random words and check spelling. See live 
 - [Bing Spell Check](https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-spell-check2/) API
 - [Random Words](https://rapidapi.com/sheharyar566/api/random-words5/) API
 - Created with [Create React App](https://github.com/facebook/create-react-app)
-
-## Connection Check\*
