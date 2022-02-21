@@ -41,7 +41,6 @@ function HelpModal({ show, close, closing }) {
                     <div className="modal-tile">S</div>
                 </div>
                 <p>The letter <strong>O</strong> is in the word but in the wrong spot.</p>
-                <div>VAGUE</div>
                 <div className='modal-tile-container'>
                     <div className="modal-tile">C</div>
                     <div className="modal-tile">R</div>
