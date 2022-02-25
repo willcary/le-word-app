@@ -6,17 +6,15 @@ import Keyboard from "./components/Keyboard"
 import Alert from './components/Alert'
 
 function App() {
-  const { theme, gameOver, isWord, solution } = useContext(Context)
-  const bodyClass = theme === 'dark' ? 'body-darkmode' : undefined
+  const { gameOver, isWord, solution } = useContext(Context)
+  
 
   return (
-    <div className={bodyClass}>
-      <div className="game-body">
-        <Header />
-        <Alert gameOver={gameOver} isWord={isWord} solution={solution} />
-        <Board />
-        <Keyboard />
-      </div>
+    <div className="game-body">
+      <Header />
+      <Alert gameOver={gameOver} isWord={isWord} solution={solution} />
+      <Board />
+      <Keyboard />
     </div>
   );
 }
