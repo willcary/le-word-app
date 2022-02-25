@@ -1,8 +1,4 @@
 /*================================ KEYBOARD STYLES =================================*/
-.keyboard {
-  margin-bottom: 2rem;
-}
-
 .keyboard__row {
   display: flex;
   justify-content: center;

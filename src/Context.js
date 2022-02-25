@@ -252,13 +252,18 @@ function ContextProvider({children}) {
     useEffect(() => localStorage.setItem('guessDistribution', JSON.stringify(guessDistribution)), [guessDistribution])
 
 
-
     // Add Event Listeners for Comp Keyboard Interactions 
     useEffect(() => {
         window.addEventListener("keydown", handleKeyTap)
         return () => window.removeEventListener("keydown", handleKeyTap)
     }, [currentGuess])
 
+    
+    // Add Event Listeners for Comp Keyboard Interactions 
+    window.addEventListener('resize', () => {
+        let vh = window.innerHeight
+        document.documentElement.style.setProperty('--vh', `${vh}px`)
+    })
 
 
     return (
