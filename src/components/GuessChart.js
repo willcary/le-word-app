@@ -3,7 +3,9 @@ import { Context } from "../Context"
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LabelList } from 'recharts'
 
 function GuessChart() {
-    const { guessDistribution } = useContext(Context)
+    const { guessDistribution, theme } = useContext(Context)
+    const textColor = () => theme === 'light' ? '#1a1a1b' : '#ffffff'
+
     return (
         <ResponsiveContainer width="100%" height="100%">
             <BarChart
@@ -22,7 +24,7 @@ function GuessChart() {
                 <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} />
                 <Tooltip />
                 <Bar dataKey="count" fill="#538d4e">
-                    <LabelList dataKey="count" position="right" />
+                    <LabelList dataKey="count" position="right" fill={textColor()} />
                 </Bar>
             </BarChart>
         </ResponsiveContainer>
