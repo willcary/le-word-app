@@ -1,6 +1,6 @@
 # Le Word - A Wordle Clone
 
-A wordle clone that uses APIs to pull random words and check spelling. See live [here]().
+A wordle clone that uses APIs to pull random words and check spelling. See live [here](https://leword.netlify.app/).
 
 ## Game Instructions
 
@@ -8,6 +8,15 @@ A wordle clone that uses APIs to pull random words and check spelling. See live 
 - Each guess must be a valid 5 letter word. Press the enter button to submit.
 - After each guess, the color of the tiles will change to show how close your guess was to the word (see help modal for examples).
 - Refresh the page for a new word.
+
+![Example of Le Word being played in dark mode.](./src/assets/images/le-word.jpg)
+_Example of Le Word being played in dark mode._
+![Instructions/help modal.](./src/assets/images/le-word-instructions.jpg)
+_Instructions/help modal._
+![Statistics modal.](./src/assets/images/le-word-stats.jpg)
+_Statistics modal._
+![Example of Le Word being played in light mode.](./src/assets/images/le-word-light.jpg)
+_Example of Le Word being played in light mode._
 
 ## Make It Your Own
 
