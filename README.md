@@ -11,10 +11,13 @@ A wordle clone that uses APIs to pull random words and check spelling. See live 
 
 ![Example of Le Word being played in dark mode.](./src/assets/images/le-word.jpg)
 _Example of Le Word being played in dark mode._
+
 ![Instructions/help modal.](./src/assets/images/le-word-instructions.jpg)
 _Instructions/help modal._
+
 ![Statistics modal.](./src/assets/images/le-word-stats.jpg)
 _Statistics modal._
+
 ![Example of Le Word being played in light mode.](./src/assets/images/le-word-light.jpg)
 _Example of Le Word being played in light mode._
 
