@@ -78,7 +78,7 @@ function ContextProvider({children}) {
     // ====================================== Logic for handling key presses and updating state accordingly =========================================
     const colorKeyboard = (keyboard, letter, className) => {
         keyboard.forEach(array => {
-            array.forEach(key => key.letter === letter && !key.class ? key.class = className : undefined)
+            array.forEach(key => key.letter === letter ? key.class = className : undefined)
         })
     }
 
@@ -119,8 +119,6 @@ function ContextProvider({children}) {
         setTimeout(() => setIsWord(true), 2000)
     }
 
-
-    // Bug with incrementing guesses other than lost. Updated number returns null. Rethink using GUESS_REF.********************************************!!!!
     const guessSubmitLogic = (guess) => {
         const newGuessDist = [...guessDistribution]
         if (guess === solution) {
