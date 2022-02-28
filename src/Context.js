@@ -268,10 +268,13 @@ function ContextProvider({children}) {
 
     
     // Add Event Listeners for Comp Keyboard Interactions 
-    window.addEventListener('resize', () => {
+    function viewHeight() {
         let vh = window.innerHeight
         document.documentElement.style.setProperty('--vh', `${vh}px`)
-    })
+    }
+
+    window.addEventListener('DOMContentLoaded', () => viewHeight())
+    window.addEventListener('resize', () => viewHeight())
 
 
     return (
