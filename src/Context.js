@@ -78,7 +78,17 @@ function ContextProvider({children}) {
     // ====================================== Logic for handling key presses and updating state accordingly =========================================
     const colorKeyboard = (keyboard, letter, className) => {
         keyboard.forEach(array => {
-            array.forEach(key => key.letter === letter ? key.class = className : undefined)
+            array.forEach(key => {
+                if (key.letter === letter) {
+                    if (className === 'green-overlay') {
+                        key.class = className
+                    } else if (className === 'yellow-overlay' && key.class !== 'green-overlay') {
+                        key.class = className
+                    } else if (className === 'gray-overlay' && !key.class) {
+                        key.class = className
+                    }
+                }
+            })
         })
     }
 
