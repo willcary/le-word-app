@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { Context } from '../Context'
-// import PropTypes from 'prop-types'
 import "../css/keyboard.css"
 
 function Keyboard() {
@@ -20,7 +19,5 @@ function Keyboard() {
       </div>
   </div>;
 }
-
-// Keyboard.propTypes = {};
 
 export default Keyboard;
