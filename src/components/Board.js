@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Context } from '../Context'
-// import PropTypes from 'prop-types';
 import "../css/board.css"
 
 import Tile from "./Tile"
@@ -22,7 +21,5 @@ function Board() {
       })}
   </div>;
 }
-
-// Board.propTypes = {};
 
 export default Board;
