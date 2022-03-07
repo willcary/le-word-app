@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from "../Context"
 
-export default function Alert({ gameOver, isWord, solution }) {
+export default function Alert() {
+  const { gameOver, isWord, solution } = useContext(Context)
+  
   if (!isWord) {
     return <div className="alert">Incorrect Spelling</div>
   } else if (gameOver) {
@@ -9,4 +12,3 @@ export default function Alert({ gameOver, isWord, solution }) {
     return null;
   }
 }
-
