@@ -135,7 +135,7 @@ function ContextProvider({children}) {
 
     const guessSubmitLogic = (guess) => {
         const newGuessDist = [...guessDistribution]
-        if (guess === solution && !gameOver) {
+        if (guess === solution) {
             setGameOver(true)
             setDidWin(true)
             setTimeout(() => setShowStatsModal(true), 800)
@@ -145,7 +145,7 @@ function ContextProvider({children}) {
             setGuessDistribution(newGuessDist)
             return
         }
-        if (currentRow >= 5 && !gameOver) {
+        if (currentRow >= 5) {
             setGameOver(true)
             setTimeout(() => setShowStatsModal(true), 800)
             setGamesPlayed(prevCount => prevCount += 1)
@@ -164,7 +164,7 @@ function ContextProvider({children}) {
             }
             return
         }
-        if (value === "ENTER") {
+        if (value === "ENTER" && !gameOver) {
             if (currentGuess >= 5) {
                 const guess = boardContent[currentRow].join('')
                 fetch("https://bing-spell-check2.p.rapidapi.com/spellcheck?mode=proof&text=" + guess, {
@@ -270,7 +270,7 @@ function ContextProvider({children}) {
     useEffect(() => {
         window.addEventListener("keydown", handleKeyTap)
         return () => window.removeEventListener("keydown", handleKeyTap)
-    }, [currentGuess])
+    }, [currentGuess, gameOver])
 
     
     // Add Event Listeners for Comp Keyboard Interactions 
