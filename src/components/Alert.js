@@ -6,9 +6,7 @@ export default function Alert() {
   
   if (!isWord) {
     return <div className="alert">Incorrect Spelling</div>
-  } else if (gameOver && didWin) {
-    return <div className="alert">Nice Job!</div>
-  } else if (gameOver) {
+  } else if (gameOver && !didWin) {
     return <div className="alert">Solution: {solution}</div>
   } else {
     return null;
