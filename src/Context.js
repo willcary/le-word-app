@@ -225,18 +225,18 @@ function ContextProvider({children}) {
     // ====================================== Fetch request for a random word to start the game =========================================
 
     useEffect(() => {
-        // fetch("https://random-words5.p.rapidapi.com/getMultipleRandom?count=5&wordLength=5", {
-        //     "method": "GET",
-        //     "headers": {
-        //         "x-rapidapi-host": "random-words5.p.rapidapi.com",
-        //         "x-rapidapi-key": process.env.REACT_APP_RANDOM_WORDS_API_KEY
-        //     }
-        // })
-        // .then(response => response.json())
-        // .then(data => setSolution(data[0].toUpperCase()))
-        // .catch(err => {
-        //     console.error(err);
-        // })
+        fetch("https://random-words5.p.rapidapi.com/getMultipleRandom?count=5&wordLength=5", {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "random-words5.p.rapidapi.com",
+                "x-rapidapi-key": process.env.REACT_APP_RANDOM_WORDS_API_KEY
+            }
+        })
+        .then(response => response.json())
+        .then(data => setSolution(data[0].toUpperCase()))
+        .catch(err => {
+            console.error(err);
+        })
         if (storageAvailable('localStorage')) {
             const storedGamesPlayed = localStorage.getItem('gamesPlayed')
             const storedGamesWon = localStorage.getItem('gamesWon')
