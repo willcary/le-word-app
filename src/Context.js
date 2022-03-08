@@ -60,8 +60,9 @@ function ContextProvider({children}) {
     let [currentRow, setCurrentRow] = useState(0)
     let [currentGuess, setCurrentGuess] = useState(0)
     const [gameOver, setGameOver] = useState(false)
+    const [didWin, setDidWin] = useState(false)
     const [isWord, setIsWord] = useState(true)
-    const [solution, setSolution] = useState('WORDY')
+    const [solution, setSolution] = useState('FLAWS')
     const [gamesPlayed, setGamesPlayed] = useState(0)
     const [gamesWon, setGamesWon] = useState(0)
     const [guessDistribution, setGuessDistribution] = useState([
@@ -96,23 +97,50 @@ function ContextProvider({children}) {
         const newBoardStyles = [...boardStyles]
         const newKeyboard = [...keyboard]
         let mutableSolution = solution;
+        console.log("Original: ", mutableSolution)
         boardContent[currentRow].forEach((letter, index) => {
             if (letter === solution[index]) {
                 newBoardStyles[currentRow][index] = 'flip green-overlay'
                 colorKeyboard(newKeyboard, letter, 'green-overlay')
-                mutableSolution = mutableSolution.replace(letter, '')
-                return
-            } else if (mutableSolution.includes(letter)) {
-                newBoardStyles[currentRow][index] = 'flip yellow-overlay'
-                colorKeyboard(newKeyboard, letter, 'yellow-overlay')
-                mutableSolution = mutableSolution.replace(letter, '')
-                return
-            } else {
-                newBoardStyles[currentRow][index] = 'flip gray-overlay'
-                colorKeyboard(newKeyboard, letter, 'gray-overlay')
-                return
+                mutableSolution = mutableSolution.substring(0, index) + '-' + mutableSolution.substring(index + 1)
+                console.log(mutableSolution, newBoardStyles[currentRow])
             }
         })
+        boardContent[currentRow].forEach((letter, index) => {
+            if (mutableSolution.includes(letter)) {
+                newBoardStyles[currentRow][index] = 'flip yellow-overlay'
+                colorKeyboard(newKeyboard, letter, 'yellow-overlay')
+                //CHECK LOGIC HERE
+                // mutableSolution = mutableSolution.substring(0, index) + '-' + mutableSolution.substring(index + 1)
+                mutableSolution = mutableSolution.replace(letter, '-')
+                console.log(mutableSolution, newBoardStyles[currentRow])
+            }
+        })
+        boardContent[currentRow].forEach((letter, index) => {
+            //CHECK LOGIC HERE
+            if (!newBoardStyles[currentRow][index]) {
+                newBoardStyles[currentRow][index] = 'flip gray-overlay'
+                colorKeyboard(newKeyboard, letter, 'gray-overlay')
+                console.log(mutableSolution, newBoardStyles[currentRow])
+            }
+        })
+        // boardContent[currentRow].forEach((letter, index) => {
+        //     if (letter === solution[index]) {
+        //         newBoardStyles[currentRow][index] = 'flip green-overlay'
+        //         colorKeyboard(newKeyboard, letter, 'green-overlay')
+        //         mutableSolution = mutableSolution.replace(letter, '')
+        //         return
+        //     } else if (mutableSolution.includes(letter)) {
+        //         newBoardStyles[currentRow][index] = 'flip yellow-overlay'
+        //         colorKeyboard(newKeyboard, letter, 'yellow-overlay')
+        //         mutableSolution = mutableSolution.replace(letter, '')
+        //         return
+        //     } else {
+        //         newBoardStyles[currentRow][index] = 'flip gray-overlay'
+        //         colorKeyboard(newKeyboard, letter, 'gray-overlay')
+        //         return
+        //     }
+        // })
         setBoardStyles(newBoardStyles)
         setKeyboard(newKeyboard)
     } 
@@ -131,7 +159,9 @@ function ContextProvider({children}) {
 
     const guessSubmitLogic = (guess) => {
         const newGuessDist = [...guessDistribution]
-        if (guess === solution) {
+        if (guess === solution && !gameOver) {
+            setGameOver(true)
+            setDidWin(true)
             setTimeout(() => setShowStatsModal(true), 800)
             setGamesPlayed(prevCount => prevCount += 1)
             setGamesWon(prevCount => prevCount += 1)
@@ -139,7 +169,7 @@ function ContextProvider({children}) {
             setGuessDistribution(newGuessDist)
             return
         }
-        if (currentRow >= 5) {
+        if (currentRow >= 5 && !gameOver) {
             setGameOver(true)
             setTimeout(() => setShowStatsModal(true), 800)
             setGamesPlayed(prevCount => prevCount += 1)
@@ -172,7 +202,6 @@ function ContextProvider({children}) {
                 .then(data => {
                     if (data.flaggedTokens.length > 0) {
                         shakeTiles()
-                        return
                     } else {
                         flipTile()
                         guessSubmitLogic(guess)
@@ -180,6 +209,7 @@ function ContextProvider({children}) {
                 })
                 .catch(err => {
                     console.error(err);
+                    flipTile()
                     guessSubmitLogic(guess)
                 })
             }
@@ -219,18 +249,18 @@ function ContextProvider({children}) {
     // ====================================== Fetch request for a random word to start the game =========================================
 
     useEffect(() => {
-        fetch("https://random-words5.p.rapidapi.com/getMultipleRandom?count=5&wordLength=5", {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "random-words5.p.rapidapi.com",
-                "x-rapidapi-key": process.env.REACT_APP_RANDOM_WORDS_API_KEY
-            }
-        })
-        .then(response => response.json())
-        .then(data => setSolution(data[0].toUpperCase()))
-        .catch(err => {
-            console.error(err);
-        })
+        // fetch("https://random-words5.p.rapidapi.com/getMultipleRandom?count=5&wordLength=5", {
+        //     "method": "GET",
+        //     "headers": {
+        //         "x-rapidapi-host": "random-words5.p.rapidapi.com",
+        //         "x-rapidapi-key": process.env.REACT_APP_RANDOM_WORDS_API_KEY
+        //     }
+        // })
+        // .then(response => response.json())
+        // .then(data => setSolution(data[0].toUpperCase()))
+        // .catch(err => {
+        //     console.error(err);
+        // })
         if (storageAvailable('localStorage')) {
             const storedGamesPlayed = localStorage.getItem('gamesPlayed')
             const storedGamesWon = localStorage.getItem('gamesWon')
@@ -291,6 +321,7 @@ function ContextProvider({children}) {
             showStatsModal,
             setShowStatsModal,
             gameOver,
+            didWin,
             isWord,
             solution
         }}>
