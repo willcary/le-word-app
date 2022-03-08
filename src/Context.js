@@ -97,13 +97,11 @@ function ContextProvider({children}) {
         const newBoardStyles = [...boardStyles]
         const newKeyboard = [...keyboard]
         let mutableSolution = solution;
-        console.log("Original: ", mutableSolution)
         boardContent[currentRow].forEach((letter, index) => {
             if (letter === solution[index]) {
                 newBoardStyles[currentRow][index] = 'flip green-overlay'
                 colorKeyboard(newKeyboard, letter, 'green-overlay')
                 mutableSolution = mutableSolution.substring(0, index) + '-' + mutableSolution.substring(index + 1)
-                console.log(mutableSolution, newBoardStyles[currentRow])
             }
         })
         boardContent[currentRow].forEach((letter, index) => {
@@ -111,14 +109,12 @@ function ContextProvider({children}) {
                 newBoardStyles[currentRow][index] = 'flip yellow-overlay'
                 colorKeyboard(newKeyboard, letter, 'yellow-overlay')
                 mutableSolution = mutableSolution.replace(letter, '-')
-                console.log(mutableSolution, newBoardStyles[currentRow])
             }
         })
         boardContent[currentRow].forEach((letter, index) => {
             if (!newBoardStyles[currentRow][index]) {
                 newBoardStyles[currentRow][index] = 'flip gray-overlay'
                 colorKeyboard(newKeyboard, letter, 'gray-overlay')
-                console.log(mutableSolution, newBoardStyles[currentRow])
             }
         })
         setBoardStyles(newBoardStyles)
