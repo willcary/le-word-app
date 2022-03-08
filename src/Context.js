@@ -110,37 +110,17 @@ function ContextProvider({children}) {
             if (mutableSolution.includes(letter)) {
                 newBoardStyles[currentRow][index] = 'flip yellow-overlay'
                 colorKeyboard(newKeyboard, letter, 'yellow-overlay')
-                //CHECK LOGIC HERE
-                // mutableSolution = mutableSolution.substring(0, index) + '-' + mutableSolution.substring(index + 1)
                 mutableSolution = mutableSolution.replace(letter, '-')
                 console.log(mutableSolution, newBoardStyles[currentRow])
             }
         })
         boardContent[currentRow].forEach((letter, index) => {
-            //CHECK LOGIC HERE
             if (!newBoardStyles[currentRow][index]) {
                 newBoardStyles[currentRow][index] = 'flip gray-overlay'
                 colorKeyboard(newKeyboard, letter, 'gray-overlay')
                 console.log(mutableSolution, newBoardStyles[currentRow])
             }
         })
-        // boardContent[currentRow].forEach((letter, index) => {
-        //     if (letter === solution[index]) {
-        //         newBoardStyles[currentRow][index] = 'flip green-overlay'
-        //         colorKeyboard(newKeyboard, letter, 'green-overlay')
-        //         mutableSolution = mutableSolution.replace(letter, '')
-        //         return
-        //     } else if (mutableSolution.includes(letter)) {
-        //         newBoardStyles[currentRow][index] = 'flip yellow-overlay'
-        //         colorKeyboard(newKeyboard, letter, 'yellow-overlay')
-        //         mutableSolution = mutableSolution.replace(letter, '')
-        //         return
-        //     } else {
-        //         newBoardStyles[currentRow][index] = 'flip gray-overlay'
-        //         colorKeyboard(newKeyboard, letter, 'gray-overlay')
-        //         return
-        //     }
-        // })
         setBoardStyles(newBoardStyles)
         setKeyboard(newKeyboard)
     } 
