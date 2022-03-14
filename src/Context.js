@@ -247,7 +247,7 @@ function ContextProvider({children}) {
             if (storedGamesPlayed) {
                 setGamesPlayed(Number(storedGamesPlayed))
             }
-            if (Object.values(storedGuessDistribution).some(item => item)) {
+            if (storedGuessDistribution) {
                 setGuessDistribution(JSON.parse(storedGuessDistribution))
             }
         }
